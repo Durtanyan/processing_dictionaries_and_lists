@@ -149,7 +149,46 @@ if number_user <= len_list:
                     print('  логин:', user_list[number_user][i][k])
                 elif k == 'password':
                     print('  пароль:', user_list[number_user][i][k])
-                #print(k, ':', user_list[number_user][i][k])
 else:
     print('Пользователь с указанным номером не найден')
+    
+'''
+3. После чего программа должна спросить - какого пользователя переместить в конец
+ и перенести его в конец списка user_list, затем вывести того кого переместили 
+ и список до изменения и список после изменения.
+Сообщение для ввода: “Введите номер пользователя, которого нужно переместить в конец: ”
+'''
+
+def request_a_number_user():
+    request_a_number_user = input('Введите номер пользователя, которого нужно переместить в конец: ')
+    return request_a_number_user
+
+#проверяем тип введенного значения
+def type_number_user():
+    #присваиваем введенное значение переменной
+    number_user = request_a_number_user()
+    #цикл будет отрабатывать пока не введут число
+    while type(number_user) != int:
+        try:
+            number_user = int(number_user)
+            type(number_user) == int
+        except:
+            print('Кажется вы ввели строку. Введите пожалуйста число...')
+            number_user = request_a_number_user()
+    return number_user
+
+number_user = type_number_user()
+
+while number_user <= 0 or number_user > len(user_list):
+    print('Номер пользователя должен быть больше нуля и меньше {}...'.format(len(user_list)))
+    number_user = type_number_user()
+
+
+
+
+
+
+
+
+
         
