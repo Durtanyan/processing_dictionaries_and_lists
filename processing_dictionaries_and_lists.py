@@ -106,29 +106,50 @@ def request_a_number():
     request_a_number = input('Введите порядковый номер: ')
     return request_a_number
 
-#присваиваем введенное значение переменной
-number_user = request_a_number()
-
 #проверяем тип введенного значения
-#цикл будет отрабатывать пока не введут число
-while type(number_user) != int:
-    try:
-        number_user = int(number_user)
-        type(number_user) == int
-    except:
-        print('Кажется вы ввели строку. Введите пожалуйста число...')
-        number_user = request_a_number()
+def type_number():
+    #присваиваем введенное значение переменной
+    number_user = request_a_number()
+    #цикл будет отрабатывать пока не введут число
+    while type(number_user) != int:
+        try:
+            number_user = int(number_user)
+            type(number_user) == int
+        except:
+            print('Кажется вы ввели строку. Введите пожалуйста число...')
+            number_user = request_a_number()
+    return number_user
+
+number_user = type_number()
+# переменная "number_user" должна быть больше нуля
+# т.к. редко кто вводит порядковый номер меньше единицы
+# но это исключение надо обработать
+while number_user <= 0:
+    print('Порядковый номер должен быть больше нуля...')
+    number_user = type_number()
         
 # находим длину списка и если введенное значение больше этого значения
 # выводим сообщение “Пользователь с указанным номером не найден”.
 len_list = len(user_list)
-if number_user <= len_list - 1:
+if number_user <= len_list:
+    #поскольку индексация списка начинается с нуля, уменьшим нашу переменную
+    #на единицу, а порядковый номер присвоим другой переменной
+    serial_number = number_user
+    number_user -= 1
+    print(' Данные по юзеру № {}:'.format(serial_number))
     for i in user_list[number_user]:
         if i != 'account':
-            print(i, user_list[number_user][i])
+            if i == 'name':
+                print('  имя:', user_list[number_user][i])
+            elif i == 'age':
+                print('  возраст:', user_list[number_user][i])
         elif i == 'account':
             for k in user_list[number_user][i]:
-                print(k, ':', user_list[number_user][i][k])
+                if k == 'login':
+                    print('  логин:', user_list[number_user][i][k])
+                elif k == 'password':
+                    print('  пароль:', user_list[number_user][i][k])
+                #print(k, ':', user_list[number_user][i][k])
 else:
     print('Пользователь с указанным номером не найден')
         
