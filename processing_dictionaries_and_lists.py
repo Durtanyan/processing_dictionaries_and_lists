@@ -180,15 +180,22 @@ def type_number_user():
 number_user = type_number_user()
 
 while number_user <= 0 or number_user > len(user_list):
-    print('Номер пользователя должен быть больше нуля и меньше {}...'.format(len(user_list)))
+    print('Номер пользователя должен быть больше нуля и меньше {}...'.format(len(user_list) + 1))
     number_user = type_number_user()
+#print(number_user, type(number_user))
+    
+user_moving = user_list[number_user - 1]
+#print(user_moving['name'])
+print('Список до изменения.')
+print(user_list)
+print('Пользователь с именем {} перенесен в конец.'.format(user_moving['name']))
+new_list = []
+for i in user_list:
+    new_list.append(i)
+#print(new_list)
+user_transfer = new_list.pop(number_user - 1)
+new_list.append(user_transfer)
+print('Список после изменения.')
+print(new_list)
 
 
-
-
-
-
-
-
-
-        
