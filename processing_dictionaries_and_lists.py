@@ -86,39 +86,49 @@ if value_name_or_account == 'name' or value_name_or_account == 'account':
 else:
     print(' Введенный ключ не найден.')
     
-    
+'''
+2. После этого программа должна запрашивать порядковый номер
+ и выводить всю информацию для юзера из списка user_list по введенному 
+ порядковому номеру. Если введен не корректный номер, 
+ то выдавать сообщение: “Пользователь с указанным номером не найден”.
 
-#print(value_name_or_account)
+Сообщение для ввода порядкового номера: “Введите порядковый номер: ”
 
+Введите порядковый номер: 3
+Данные по юзеру № 3:
+имя: Ольга
+возраст: 18
+логин: olga
+пароль: q3
+'''
+#функция возвращает порядковый номер пользователя в списке
+def request_a_number():
+    request_a_number = input('Введите порядковый номер: ')
+    return request_a_number
 
+#присваиваем введенное значение переменной
+number_user = request_a_number()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#проверяем тип введенного значения
+#цикл будет отрабатывать пока не введут число
+while type(number_user) != int:
+    try:
+        number_user = int(number_user)
+        type(number_user) == int
+    except:
+        print('Кажется вы ввели строку. Введите пожалуйста число...')
+        number_user = request_a_number()
+        
+# находим длину списка и если введенное значение больше этого значения
+# выводим сообщение “Пользователь с указанным номером не найден”.
+len_list = len(user_list)
+if number_user <= len_list - 1:
+    for i in user_list[number_user]:
+        if i != 'account':
+            print(i, user_list[number_user][i])
+        elif i == 'account':
+            for k in user_list[number_user][i]:
+                print(k, ':', user_list[number_user][i][k])
+else:
+    print('Пользователь с указанным номером не найден')
+        
