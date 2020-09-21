@@ -178,24 +178,46 @@ def type_number_user():
     return number_user
 
 number_user = type_number_user()
-
+# проверяем, чтобы введенное число не было равным нулю,
+# отрицательным или больше количества юзеров в списке
 while number_user <= 0 or number_user > len(user_list):
     print('Номер пользователя должен быть больше нуля и меньше {}...'.format(len(user_list) + 1))
     number_user = type_number_user()
-#print(number_user, type(number_user))
-    
+
+#юзер для перемещения в конец списка, т.к. нумерация в списке начинается с нуля, 
+# то уменьшаем номер юзера на единицу, таким образом находим индекс юзера в списке    
 user_moving = user_list[number_user - 1]
-#print(user_moving['name'])
+
 print('Список до изменения.')
 print(user_list)
 print('Пользователь с именем {} перенесен в конец.'.format(user_moving['name']))
+
+# создаем пустой список и копируем в него старый список
+# старый список трогать не будем, все манипуляции будем проводить с новым списком
 new_list = []
 for i in user_list:
     new_list.append(i)
-#print(new_list)
+
+#метод .pop() удаляет найденного юзера, но дает возможность присвоить его переменной
+# метод .append() добавляет юзера в конец списка
 user_transfer = new_list.pop(number_user - 1)
 new_list.append(user_transfer)
 print('Список после изменения.')
 print(new_list)
+
+#4. В конце должно выводиться сообщение со средним возрастом всех юзеров.
+# создаем переменную для вычисления среднего возраста, находим и помещаем в нее
+# общий возраст всех юзеров и делим его на длину списка
+middle_age = 0
+for key in user_list:
+    for i in key:
+        if i == 'age':
+            middle_age += key[i]
+
+middle_age /= len(user_list)
+print('Средний возраст пользователей {}'.format(middle_age))
+
+
+
 
 
